@@ -1,4 +1,4 @@
-# 🌡️ Urban Heat Mitigation and cooling V1
+# Urban Heat Mitigation and cooling V1
 
 AI-powered urban heat island analysis and cooling-intervention simulator — covering **14 cities** (13 across India + Phoenix, AZ).
 
@@ -6,8 +6,8 @@ AI-powered urban heat island analysis and cooling-intervention simulator — cov
 
 ## Live Demo
 
-- 🌐 Frontend: _add your Vercel link here_
-- ⚙️ API: _add your Render link here_
+- 🌐 Frontend: https://urban-heat-mitigation-mu.vercel.app/
+- ⚙️ API: https://urban-heat-api.onrender.com/docs
 
 ## Features
 
