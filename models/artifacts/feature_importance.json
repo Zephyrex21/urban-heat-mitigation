@@ -1,0 +1,112 @@
+[
+  {
+    "feature": "air_temp_max",
+    "importance": 1.896,
+    "direction": "positive"
+  },
+  {
+    "feature": "veg_imperv_ratio",
+    "importance": 1.1222,
+    "direction": "negative"
+  },
+  {
+    "feature": "cooling_potential",
+    "importance": 0.3892,
+    "direction": "positive"
+  },
+  {
+    "feature": "ndvi_mean",
+    "importance": 0.3123,
+    "direction": "negative"
+  },
+  {
+    "feature": "frac_impervious",
+    "importance": 0.3073,
+    "direction": "positive"
+  },
+  {
+    "feature": "wind_speed_mean",
+    "importance": 0.2369,
+    "direction": "negative"
+  },
+  {
+    "feature": "road_density",
+    "importance": 0.2331,
+    "direction": "negative"
+  },
+  {
+    "feature": "sky_view_factor",
+    "importance": 0.1848,
+    "direction": "negative"
+  },
+  {
+    "feature": "water_area_frac",
+    "importance": 0.1641,
+    "direction": "negative"
+  },
+  {
+    "feature": "solar_radiation",
+    "importance": 0.1387,
+    "direction": "positive"
+  },
+  {
+    "feature": "building_density",
+    "importance": 0.1165,
+    "direction": "positive"
+  },
+  {
+    "feature": "thermal_mass_proxy",
+    "importance": 0.1164,
+    "direction": "positive"
+  },
+  {
+    "feature": "ndbi_mean",
+    "importance": 0.1079,
+    "direction": "positive"
+  },
+  {
+    "feature": "frac_water",
+    "importance": 0.092,
+    "direction": "negative"
+  },
+  {
+    "feature": "frac_bare_soil",
+    "importance": 0.0892,
+    "direction": "negative"
+  },
+  {
+    "feature": "frac_vegetation",
+    "importance": 0.0692,
+    "direction": "negative"
+  },
+  {
+    "feature": "park_area_frac",
+    "importance": 0.0663,
+    "direction": "negative"
+  },
+  {
+    "feature": "building_height_mean",
+    "importance": 0.0618,
+    "direction": "positive"
+  },
+  {
+    "feature": "dist_to_water",
+    "importance": 0.0489,
+    "direction": "positive"
+  },
+  {
+    "feature": "green_deficit",
+    "importance": 0.0422,
+    "direction": "positive"
+  },
+  {
+    "feature": "tree_canopy_frac",
+    "importance": 0.0335,
+    "direction": "positive"
+  },
+  {
+    "feature": "ndvi_std",
+    "importance": 0.0241,
+    "direction": "negative"
+  }
+]
