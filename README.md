@@ -1,4 +1,4 @@
-# 🌡️ Urban Heat MVP
+# 🌡️ Urban Heat Mitigation and cooling V1
 
 AI-powered urban heat island analysis and cooling-intervention simulator — covering **14 cities** (13 across India + Phoenix, AZ).
 
