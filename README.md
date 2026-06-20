@@ -7,7 +7,7 @@ AI-powered urban heat island analysis and cooling-intervention simulator — cov
 ## Live Demo
 
 - 🌐 Frontend: https://urban-heat-mitigation-mu.vercel.app/
-- ⚙️ API: https://urban-heat-api.onrender.com
+- ⚙️ API: https://urban-heat-api.onrender.com/docs
 
 ## Features
 
