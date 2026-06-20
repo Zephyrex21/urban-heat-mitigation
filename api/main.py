@@ -20,7 +20,10 @@ app = FastAPI(
 # Enable CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For hackathon MVP
+    allow_origins=[
+        "https://urban-heat-mitigation-mu.vercel.app",
+        "http://localhost:5173",                            # keep this so local dev still works
+    ],                                                     
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
