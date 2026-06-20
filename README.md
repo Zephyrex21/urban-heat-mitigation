@@ -1,64 +1,59 @@
-# Urban Heat Mitigation & Cooling Strategies MVP
+# 🌡️ Urban Heat MVP
 
-> **AI-powered urban heat island analysis and cooling intervention simulator for 14 cities — 13 across India plus Phoenix, AZ**
+AI-powered urban heat island analysis and cooling-intervention simulator — covering **14 cities** (13 across India + Phoenix, AZ).
 
-## Quick Start
+*Status: V1 — actively being improved.*
 
-### Backend
+## Live Demo
+
+- 🌐 Frontend: _add your Vercel link here_
+- ⚙️ API: _add your Render link here_
+
+## Features
+
+- **Heat Map** — interactive grid map (Deck.gl + MapLibre) showing land surface temperature and hotspot tiers
+- **Driver Analysis** — SHAP-based explainability showing what's driving the heat in each grid cell
+- **Scenario Builder** — simulate cooling interventions (tree cover, reflective roofs, etc.) with a live before/after split view
+
+## Tech Stack
+
+| | |
+|---|---|
+| **Backend** | FastAPI · XGBoost · SHAP · GeoPandas |
+| **Frontend** | React · Vite · Deck.gl · MapLibre GL · Recharts |
+| **Storage** | GeoParquet flat files — zero infrastructure |
+
+## Run Locally
+
+Data and a trained model are already included in this repo — no generation or training needed to run it.
+
+**Backend**
 ```bash
-cd urban-heat-mvp-work
 python -m venv venv
-venv\Scripts\Activate.ps1        # Windows PowerShell — on Mac/Linux: source venv/bin/activate
-pip install -e ".[dev]"
-
-# Generate synthetic demo data for every city (takes ~1 min)
-python -m pipeline.generate_synthetic
-# Or just one city, e.g.: python -m pipeline.generate_synthetic new_delhi
-
-# Train the model — ONE shared model trained on all cities combined
-# (takes a few minutes; computing SHAP values on ~50k rows is the slow part)
-python -m models.train_hotspot
-
-# Start API
+venv\Scripts\Activate.ps1     # Windows. Mac/Linux: source venv/bin/activate
+pip install -r requirements.txt
 uvicorn api.main:app --reload --port 8000
 ```
 
-### Frontend
+**Frontend** (in a second terminal)
 ```bash
 cd frontend
 npm install
 npm run dev
-# → http://localhost:5173
 ```
 
-Pick a city from the dropdown in the sidebar — the map, drivers, and
-scenario builder all update for whichever city is selected.
+Open `http://localhost:5173` and pick a city from the sidebar.
 
-## Architecture
+## Project Structure
 
-- **Backend**: Python 3.11 · FastAPI · XGBoost · SHAP · GeoPandas
-- **Frontend**: React 19 · Vite · Deck.gl · Recharts · MapLibre GL JS
-- **Storage**: GeoParquet flat files (zero infrastructure)
+```
+api/        FastAPI routes — grid, hotspots, drivers, scenarios
+pipeline/   Synthetic data generation & feature engineering
+models/     XGBoost training, SHAP explainability, trained artifacts
+data/       Per-city processed grids & scenario presets
+frontend/   React + Vite app
+```
 
-### Multi-city design
+## How It Works
 
-Every endpoint takes a `?city=<id>` query param (e.g. `new_delhi`,
-`mumbai`, `phoenix` — see `GET /api/v1/cities` for the full list and
-`pipeline/config.py`'s `CITIES` dict to add more). Grid, feature, and
-preset-scenario data are generated and stored per city under
-`data/processed/<city_id>/` and `data/scenarios/<city_id>/`.
-
-The ML model itself is **shared across all cities** — one XGBoost
-model trained on the combined data from every city, rather than 14
-separate models. This means cross-validation uses a leave-cities-out
-strategy (each fold holds out a few whole cities) rather than the
-within-city spatial split a single-city version would use; it's a
-more honest test of "would this generalize to a new city" than it is
-a preview of in-production accuracy, since the deployed model has
-already seen every served city's data directly.
-
-## Pages
-
-1. **Heat Map** — Interactive grid map with LST coloring and hotspot tiers
-2. **Driver Analysis** — SHAP-based feature importance and per-cell explanations
-3. **Scenario Builder** — Intervention sliders with split-view before/after map, plus preset scenarios that run through the same live simulation engine
+One shared XGBoost model is trained across all 14 cities (rather than 14 separate models), so cross-validation uses a leave-cities-out split — a fair test of generalizing to a new city, not a preview of in-production accuracy. Every API endpoint takes a `?city=<id>` query param; add a new city by extending `CITIES` in `pipeline/config.py`.
