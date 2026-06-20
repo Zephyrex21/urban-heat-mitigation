@@ -2,12 +2,17 @@ import { useState, useEffect } from 'react';
 import DeckGL from '@deck.gl/react';
 import { GeoJsonLayer } from '@deck.gl/layers';
 import Map from 'react-map-gl/maplibre';
+import { Info } from 'lucide-react';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { API_BASE } from '../api';
+import { useTheme } from '../ThemeContext';
+import LstExplainerModal from '../components/LstExplainerModal';
 import './MapView.css';
 
-// Map style (dark mode map)
-const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json';
+// Map basemap styles — switches with the app theme so the map matches
+// the surrounding UI instead of always staying dark.
+const MAP_STYLE_DARK = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json';
+const MAP_STYLE_LIGHT = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
 // Tier colors matching backend
 const TIER_COLORS = {
@@ -19,10 +24,12 @@ const TIER_COLORS = {
 };
 
 export default function MapView({ city, cityInfo }) {
+  const { theme } = useTheme();
   const [gridData, setGridData] = useState(null);
   const [overview, setOverview] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showLstInfo, setShowLstInfo] = useState(false);
 
   useEffect(() => {
     if (!city) return;
@@ -134,7 +141,7 @@ Tier: ${object.properties.tier.toUpperCase()}
 Vegetation: ${(object.properties.frac_vegetation * 100).toFixed(1)}%`
           )}
         >
-          <Map mapStyle={MAP_STYLE} />
+          <Map mapStyle={theme === 'light' ? MAP_STYLE_LIGHT : MAP_STYLE_DARK} />
         </DeckGL>
       </div>
 
@@ -142,7 +149,16 @@ Vegetation: ${(object.properties.frac_vegetation * 100).toFixed(1)}%`
       {overview && (
         <div className="kpi-overlay glass-panel">
           <div className="kpi-header">
-            <h3>{overview.city}</h3>
+            <h3>
+              {overview.city}
+              <button
+                className="info-trigger"
+                onClick={() => setShowLstInfo(true)}
+                aria-label="What does LST mean?"
+              >
+                <Info size={12} />
+              </button>
+            </h3>
             <span className="badge">{overview.analysis_period}</span>
           </div>
 
@@ -177,6 +193,8 @@ Vegetation: ${(object.properties.frac_vegetation * 100).toFixed(1)}%`
           </div>
         </div>
       )}
+
+      {showLstInfo && <LstExplainerModal onClose={() => setShowLstInfo(false)} />}
     </div>
   );
 }

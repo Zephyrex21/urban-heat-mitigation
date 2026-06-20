@@ -169,15 +169,6 @@ CITIES = {
         "base_temp_c": 29.0, "air_temp_baseline": 40.0, "veg_shift": 0.08,
         "season_label": "Apr–Jun 2026",
     },
-    "phoenix": {
-        "name": "Phoenix", "state": "Arizona", "country": "USA",
-        "bbox": CITY_BBOX,
-        "center": (-112.07, 33.45),
-        "water_axis": "lat", "water_value": 33.43,
-        "coastal": False,
-        "base_temp_c": 30.0, "air_temp_baseline": 42.0, "veg_shift": 0.0,
-        "season_label": "Jun–Aug 2026",
-    },
 }
 
 DEFAULT_CITY = "new_delhi"

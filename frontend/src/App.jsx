@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
-import { Map, BarChart2, Layers, ChevronDown } from 'lucide-react';
+import { Map, BarChart2, Layers, ChevronDown, Sun, Moon } from 'lucide-react';
 import './App.css';
 import { API_BASE } from './api';
+import { useTheme } from './ThemeContext';
 
 import MapView from './pages/MapView';
 import DriversView from './pages/DriversView';
 import ScenarioView from './pages/ScenarioView';
 
 function App() {
+  const { theme, toggleTheme } = useTheme();
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
   const [loadingCities, setLoadingCities] = useState(true);
@@ -36,7 +38,7 @@ function App() {
           <div className="logo-icon">🔥</div>
           <div className="logo-text">
             <h2>Urban Heat</h2>
-            <p>India + Demo Cities</p>
+            <p>Urban Heat Island Tracker</p>
           </div>
         </div>
 
@@ -82,6 +84,22 @@ function App() {
           <div className="status-indicator">
             <span className="dot pulse"></span>
             Live Data
+          </div>
+
+          <div className="theme-toggle-row">
+            <span className="theme-toggle-label">
+              {theme === 'light' ? <Sun size={14} /> : <Moon size={14} />}
+              {theme === 'light' ? 'Light' : 'Dark'} mode
+            </span>
+            <button
+              className={`theme-toggle-btn${theme === 'light' ? ' is-light' : ''}`}
+              onClick={toggleTheme}
+              aria-label="Toggle light and dark theme"
+            >
+              <span className="toggle-thumb">
+                {theme === 'light' ? <Sun size={11} /> : <Moon size={11} />}
+              </span>
+            </button>
           </div>
         </div>
       </aside>

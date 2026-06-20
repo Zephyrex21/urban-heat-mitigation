@@ -18,7 +18,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(10, 12, 16, 0.8);
+  background: var(--scrim-bg);
   backdrop-filter: blur(8px);
   z-index: 100;
   display: flex;
@@ -61,10 +61,12 @@
 .kpi-header h3 {
   font-size: 18px;
   margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 .badge {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--overlay-6);
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 11px;
@@ -80,10 +82,10 @@
 }
 
 .kpi-card {
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--sunken-bg);
   padding: 12px;
   border-radius: var(--radius-md);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--overlay-3);
   display: flex;
   flex-direction: column;
 }
@@ -134,5 +136,5 @@
   width: 12px;
   height: 12px;
   border-radius: 3px;
-  box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 5px var(--overlay-6);
 }

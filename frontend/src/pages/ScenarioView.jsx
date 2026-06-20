@@ -2,11 +2,15 @@ import { useState, useEffect, useCallback } from 'react';
 import DeckGL from '@deck.gl/react';
 import { GeoJsonLayer } from '@deck.gl/layers';
 import Map from 'react-map-gl/maplibre';
+import { Info } from 'lucide-react';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { API_BASE } from '../api';
+import { useTheme } from '../ThemeContext';
+import LstExplainerModal from '../components/LstExplainerModal';
 import './ScenarioView.css';
 
-const MAP_STYLE = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json';
+const MAP_STYLE_DARK = 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json';
+const MAP_STYLE_LIGHT = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
 const INTERVENTIONS = [
   { id: 'tree_cover', label: 'Tree Cover', icon: '🌳', maxImpact: 'High' },
@@ -29,6 +33,8 @@ const TIER_COLORS = {
 };
 
 export default function ScenarioView({ city, cityInfo }) {
+  const { theme } = useTheme();
+  const [showLstInfo, setShowLstInfo] = useState(false);
   const [gridData, setGridData] = useState(null);
   const [presets, setPresets] = useState([]);
   const [intensities, setIntensities] = useState(EMPTY_INTENSITIES);
@@ -260,15 +266,24 @@ export default function ScenarioView({ city, cityInfo }) {
         <div className="results-panel">
           <div className="split-maps">
             <div className="map-half">
-              <div className="map-label">Before</div>
+              <div className="map-label">
+                Before
+                <button
+                  className="info-trigger"
+                  onClick={() => setShowLstInfo(true)}
+                  aria-label="What does LST mean?"
+                >
+                  <Info size={12} />
+                </button>
+              </div>
               <DeckGL key={`before-${city}`} initialViewState={initialViewState} controller={true} layers={[beforeLayer]}>
-                <Map mapStyle={MAP_STYLE} />
+                <Map mapStyle={theme === 'light' ? MAP_STYLE_LIGHT : MAP_STYLE_DARK} />
               </DeckGL>
             </div>
             <div className="map-half">
               <div className="map-label">After</div>
               <DeckGL key={`after-${city}`} initialViewState={initialViewState} controller={true} layers={[afterLayer]}>
-                <Map mapStyle={MAP_STYLE} />
+                <Map mapStyle={theme === 'light' ? MAP_STYLE_LIGHT : MAP_STYLE_DARK} />
               </DeckGL>
             </div>
           </div>
@@ -296,6 +311,8 @@ export default function ScenarioView({ city, cityInfo }) {
         </div>
 
       </div>
+
+      {showLstInfo && <LstExplainerModal onClose={() => setShowLstInfo(false)} />}
     </div>
   );
 }

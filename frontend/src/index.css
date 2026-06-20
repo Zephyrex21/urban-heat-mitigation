@@ -16,7 +16,7 @@
   --accent-hover: #2563eb;
   --accent-glow: rgba(59, 130, 246, 0.5);
   
-  /* Semantic Colors */
+  /* Semantic Colors (heat tiers stay identical across themes for data clarity) */
   --tier-critical: #FF1744;
   --tier-high: #FF9100;
   --tier-moderate: #FFD600;
@@ -25,7 +25,24 @@
   
   --glass-bg: rgba(19, 22, 28, 0.7);
   --glass-border: rgba(255, 255, 255, 0.08);
-  
+
+  /* Solid dark chips: sidebar, builder panel, map labels, loading scrims */
+  --panel-bg-solid: rgba(13, 16, 23, 0.92);
+  --scrim-bg: rgba(10, 12, 16, 0.8);
+  --select-option-bg: #0d1017;
+  --sunken-bg: rgba(0, 0, 0, 0.2);
+
+  /* Neutral overlays used for hover states, hairline borders, subtle fills.
+     Dark theme = white-based washes; light theme (below) flips these to
+     black-based washes so the same classes work in both themes. */
+  --overlay-1: rgba(255, 255, 255, 0.03);
+  --overlay-2: rgba(255, 255, 255, 0.04);
+  --overlay-3: rgba(255, 255, 255, 0.05);
+  --overlay-4: rgba(255, 255, 255, 0.07);
+  --overlay-5: rgba(255, 255, 255, 0.08);
+  --overlay-6: rgba(255, 255, 255, 0.1);
+  --overlay-7: rgba(255, 255, 255, 0.2);
+
   /* Shadows & Layout */
   --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
@@ -41,6 +58,45 @@
   --font-display: 'Outfit', system-ui, sans-serif;
 }
 
+/* ─── Apple-inspired light theme ───────────────────────────────
+   Backdrop and text values mirror Apple's macOS/iOS light surfaces
+   (#f5f5f7 system background, #1d1d1f near-black text, #0071e3
+   system blue), with frosted-glass panels and soft, low-contrast
+   shadows instead of the dark theme's glow-based depth. */
+[data-theme="light"] {
+  --bg-primary: #f5f5f7;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e8e8ed;
+
+  --text-primary: #1d1d1f;
+  --text-secondary: #6e6e73;
+  --text-muted: #86868b;
+
+  --accent-primary: #0071e3;
+  --accent-hover: #0077ed;
+  --accent-glow: rgba(0, 113, 227, 0.35);
+
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(0, 0, 0, 0.07);
+
+  --panel-bg-solid: rgba(255, 255, 255, 0.92);
+  --scrim-bg: rgba(255, 255, 255, 0.82);
+  --select-option-bg: #ffffff;
+  --sunken-bg: rgba(0, 0, 0, 0.035);
+
+  --overlay-1: rgba(0, 0, 0, 0.035);
+  --overlay-2: rgba(0, 0, 0, 0.045);
+  --overlay-3: rgba(0, 0, 0, 0.05);
+  --overlay-4: rgba(0, 0, 0, 0.06);
+  --overlay-5: rgba(0, 0, 0, 0.07);
+  --overlay-6: rgba(0, 0, 0, 0.08);
+  --overlay-7: rgba(0, 0, 0, 0.14);
+
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.06);
+  --shadow-glow: 0 0 20px var(--accent-glow);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -54,6 +110,11 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+* {
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
