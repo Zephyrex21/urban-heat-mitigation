@@ -1,4 +1,4 @@
-import { X, Flame, Map, BarChart2, Layers, Sparkles } from 'lucide-react';
+import { X, Flame, Map, BarChart2, Layers, Sparkles, Cpu, Database } from 'lucide-react';
 import './LstExplainerModal.css';
 import './AboutModal.css';
 
@@ -70,6 +70,48 @@ export default function AboutModal({ onClose }) {
               Try fixes — adding trees, cool roofs, more water bodies — and
               see a live before/after comparison, plus an estimated cost to
               actually do it.
+            </p>
+          </div>
+        </div>
+
+        <h3 className="section-heading engine-heading">Engine &amp; data — how this is actually built</h3>
+
+        <div className="engine-grid">
+          <div className="engine-card">
+            <div className="engine-card-head">
+              <Cpu size={16} />
+              <span>Prediction engine</span>
+            </div>
+            <p>
+              Every prediction comes from an <strong>XGBoost</strong>{' '}
+              regression model — trained on urban-form features like
+              vegetation cover, building density, road density, and
+              distance to water. We test it with{' '}
+              <strong>leave-cities-out cross-validation</strong> (holding
+              out entire cities, not just random rows) so the score reflects
+              genuine generalization, not memorization. Every driver
+              ranking you see is computed with{' '}
+              <strong>SHAP</strong>, an explainability method that shows
+              exactly how much each factor pushed the temperature up or
+              down for that specific cell — not a guess.
+            </p>
+          </div>
+
+          <div className="engine-card">
+            <div className="engine-card-head">
+              <Database size={16} />
+              <span>Where the data comes from</span>
+            </div>
+            <p>
+              Each city's climate baseline (how hot its summers really get)
+              is grounded in <strong>real meteorological averages</strong>{' '}
+              for that city. The block-by-block grid itself — building
+              density, vegetation, roads — is{' '}
+              <strong>synthetically generated</strong> to realistically
+              match how Indian cities are actually laid out, not pulled
+              from live satellite imagery. We're upfront about this: it's a
+              demonstration model built on real climate science, not a live
+              monitoring feed.
             </p>
           </div>
         </div>

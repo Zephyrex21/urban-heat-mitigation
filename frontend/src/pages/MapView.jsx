@@ -7,6 +7,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { API_BASE } from '../api';
 import { useTheme } from '../ThemeContext';
 import LstExplainerModal from '../components/LstExplainerModal';
+import ServerWakingNotice from '../components/ServerWakingNotice';
 import './MapView.css';
 
 // Map basemap styles — switches with the app theme so the map matches
@@ -115,8 +116,7 @@ export default function MapView({ city, cityInfo }) {
       <div className="map-wrapper">
         {loading && (
           <div className="loading-overlay">
-            <div className="spinner"></div>
-            <p>Loading City Grid...</p>
+            <ServerWakingNotice compact />
           </div>
         )}
 

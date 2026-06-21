@@ -1,0 +1,97 @@
+.server-waking {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px;
+  color: var(--text-primary);
+}
+
+.server-waking-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(255, 145, 0, 0.12);
+  color: var(--tier-high);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+  animation: flame-pulse 2s ease-in-out infinite;
+}
+
+@keyframes flame-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 0.85; }
+}
+
+.server-waking .spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--overlay-6);
+  border-radius: 50%;
+  border-top-color: var(--accent-primary);
+  animation: server-waking-spin 1s ease-in-out infinite;
+  margin-bottom: 18px;
+}
+
+@keyframes server-waking-spin {
+  to { transform: rotate(360deg); }
+}
+
+.server-waking-message {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.server-waking-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+.server-waking-retry {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+  background: var(--overlay-3);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.server-waking-retry:hover {
+  background: var(--overlay-6);
+}
+
+/* Compact variant — used inside the map loading overlay where space is tighter */
+.server-waking.compact {
+  padding: 16px;
+}
+
+.server-waking.compact .server-waking-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 12px;
+}
+
+.server-waking.compact .spinner {
+  width: 26px;
+  height: 26px;
+  margin-bottom: 12px;
+}
+
+.server-waking.compact .server-waking-message {
+  font-size: 14px;
+}

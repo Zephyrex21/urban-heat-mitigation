@@ -101,8 +101,54 @@
   margin-top: 2px;
 }
 
+.engine-heading {
+  margin-top: 8px;
+}
+
+.engine-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.engine-card {
+  background: var(--overlay-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 18px;
+}
+
+.engine-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.engine-card-head svg {
+  color: var(--accent-primary);
+}
+
+.engine-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.engine-card p strong {
+  color: var(--text-primary);
+}
+
 @media (max-width: 640px) {
   .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .engine-grid {
     grid-template-columns: 1fr;
   }
 }

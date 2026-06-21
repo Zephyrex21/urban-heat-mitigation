@@ -5,6 +5,7 @@ import './App.css';
 import { API_BASE } from './api';
 import { useTheme } from './ThemeContext';
 import AboutModal from './components/AboutModal';
+import ServerWakingNotice from './components/ServerWakingNotice';
 
 import MapView from './pages/MapView';
 import DriversView from './pages/DriversView';
@@ -16,8 +17,11 @@ function App() {
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
   const [loadingCities, setLoadingCities] = useState(true);
+  const [citiesError, setCitiesError] = useState(null);
 
-  useEffect(() => {
+  const fetchCities = () => {
+    setLoadingCities(true);
+    setCitiesError(null);
     fetch(`${API_BASE}/api/v1/cities`)
       .then((res) => res.json())
       .then((data) => {
@@ -26,8 +30,13 @@ function App() {
       })
       .catch((err) => {
         console.error('Failed to load city list:', err);
+        setCitiesError(err.message || 'Could not reach the server.');
       })
       .finally(() => setLoadingCities(false));
+  };
+
+  useEffect(() => {
+    fetchCities();
   }, []);
 
   const activeCity = cities.find((c) => c.id === selectedCity);
@@ -116,6 +125,10 @@ function App() {
             <Route path="/drivers" element={<DriversView key={selectedCity} city={selectedCity} cityInfo={activeCity} />} />
             <Route path="/scenarios" element={<ScenarioView key={selectedCity} city={selectedCity} cityInfo={activeCity} />} />
           </Routes>
+        )}
+
+        {!selectedCity && (
+          <ServerWakingNotice onRetry={fetchCities} error={citiesError} />
         )}
       </main>
 
