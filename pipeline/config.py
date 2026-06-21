@@ -169,6 +169,83 @@ CITIES = {
         "base_temp_c": 29.0, "air_temp_baseline": 40.0, "veg_shift": 0.08,
         "season_label": "Apr–Jun 2026",
     },
+    "nagpur": {
+        # Sourced: IMD/climate normals put Nagpur's May average daily high
+        # around 44°C, among the hottest of any major Indian city.
+        "name": "Nagpur", "state": "Maharashtra", "country": "India",
+        "bbox": {"west": 78.95, "south": 21.05, "east": 79.23, "north": 21.25},
+        "center": (79.09, 21.15),
+        "water_axis": "lat", "water_value": 21.15,  # Nag river
+        "coastal": False,
+        "base_temp_c": 33.0, "air_temp_baseline": 44.0, "veg_shift": -0.02,
+        "season_label": "Apr–Jun 2026",
+    },
+    "patna": {
+        # Sourced: ~40°C average daily high in May (pre-monsoon peak).
+        "name": "Patna", "state": "Bihar", "country": "India",
+        "bbox": {"west": 84.95, "south": 25.55, "east": 85.30, "north": 25.70},
+        "center": (85.14, 25.60),
+        "water_axis": "lat", "water_value": 25.62,  # Ganges river
+        "coastal": False,
+        "base_temp_c": 30.0, "air_temp_baseline": 40.0, "veg_shift": -0.05,
+        "season_label": "Apr–Jun 2026",
+    },
+    "bhopal": {
+        # Sourced: ~41-42°C average daily high in May.
+        "name": "Bhopal", "state": "Madhya Pradesh", "country": "India",
+        "bbox": {"west": 77.30, "south": 23.15, "east": 77.55, "north": 23.35},
+        "center": (77.41, 23.26),
+        "water_axis": "lon", "water_value": 77.38,  # Upper/Lower Lakes
+        "coastal": False,
+        "base_temp_c": 31.0, "air_temp_baseline": 42.0, "veg_shift": 0.05,
+        "season_label": "Apr–Jun 2026",
+    },
+    "visakhapatnam": {
+        # Sourced: coastal city, ~35-36°C average daily high in May —
+        # notably milder than inland cities thanks to the sea breeze,
+        # despite high humidity.
+        "name": "Visakhapatnam", "state": "Andhra Pradesh", "country": "India",
+        "bbox": {"west": 83.10, "south": 17.60, "east": 83.35, "north": 17.80},
+        "center": (83.22, 17.69),
+        "water_axis": "lon", "water_value": 83.32,  # Bay of Bengal coast
+        "coastal": True,
+        "base_temp_c": 27.0, "air_temp_baseline": 36.0, "veg_shift": 0.04,
+        "season_label": "Apr–Jun 2026",
+    },
+    "guwahati": {
+        # Sourced: northeastern climate — monsoon arrives earlier here, so
+        # the pre-monsoon heat is far milder than the rest of India
+        # (~30-32°C average daily high), despite high humidity.
+        "name": "Guwahati", "state": "Assam", "country": "India",
+        "bbox": {"west": 91.60, "south": 26.05, "east": 91.85, "north": 26.25},
+        "center": (91.74, 26.14),
+        "water_axis": "lat", "water_value": 26.18,  # Brahmaputra river
+        "coastal": False,
+        "base_temp_c": 23.0, "air_temp_baseline": 31.0, "veg_shift": 0.10,
+        "season_label": "Mar–May 2026",
+    },
+    "vijayawada": {
+        # Sourced: ~41°C average daily high in May.
+        "name": "Vijayawada", "state": "Andhra Pradesh", "country": "India",
+        "bbox": {"west": 80.55, "south": 16.42, "east": 80.75, "north": 16.58},
+        "center": (80.65, 16.51),
+        "water_axis": "lat", "water_value": 16.50,  # Krishna river
+        "coastal": False,
+        "base_temp_c": 30.0, "air_temp_baseline": 41.0, "veg_shift": -0.03,
+        "season_label": "Apr–Jun 2026",
+    },
+    "coimbatore": {
+        # Sourced: ~36-37°C average daily high in April (hottest month) —
+        # milder than most inland Tamil Nadu cities due to elevation and
+        # proximity to the Western Ghats ("Kovai breeze").
+        "name": "Coimbatore", "state": "Tamil Nadu", "country": "India",
+        "bbox": {"west": 76.85, "south": 10.93, "east": 77.08, "north": 11.10},
+        "center": (76.96, 11.02),
+        "water_axis": "lat", "water_value": 10.99,  # Noyyal river
+        "coastal": False,
+        "base_temp_c": 24.0, "air_temp_baseline": 36.0, "veg_shift": 0.06,
+        "season_label": "Mar–May 2026",
+    },
 }
 
 DEFAULT_CITY = "new_delhi"

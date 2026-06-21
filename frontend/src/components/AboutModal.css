@@ -1,0 +1,108 @@
+/* Larger modal variant — used for the About/Instructions modal */
+.modal-card--large {
+  max-width: 900px;
+  width: 78vw;
+  max-height: 80vh;
+}
+
+@media (max-width: 900px) {
+  .modal-card--large {
+    width: 92vw;
+  }
+}
+
+.about-icon {
+  background: rgba(255, 23, 68, 0.12);
+  color: var(--tier-critical);
+}
+
+.section-heading {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.step-card {
+  position: relative;
+  background: var(--overlay-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 20px 16px 16px;
+}
+
+.step-number {
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--overlay-5);
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.step-card h4 {
+  font-size: 15px;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.step-card p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.about-footnote {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--overlay-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  color: var(--accent-primary);
+}
+
+.about-footnote p {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.about-footnote svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+@media (max-width: 640px) {
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+}

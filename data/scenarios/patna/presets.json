@@ -1,0 +1,97 @@
+[
+  {
+    "scenario_id": "baseline",
+    "name": "Baseline",
+    "description": "Current conditions \u2014 no interventions",
+    "interventions": {},
+    "mean_cooling_c": 0.0,
+    "max_cooling_c": 0.0,
+    "hotspots_before": 389,
+    "hotspots_after": 389,
+    "hotspot_reduction_pct": 0.0,
+    "cost_estimate_m": 0,
+    "cost_efficiency": 0
+  },
+  {
+    "scenario_id": "green_phoenix",
+    "name": "Green Cover Boost",
+    "description": "Aggressive tree planting (+20%) in all hotspot cells",
+    "interventions": {
+      "tree_cover": 0.7
+    },
+    "mean_cooling_c": -2.56,
+    "max_cooling_c": -5.47,
+    "hotspots_before": 389,
+    "hotspots_after": 171,
+    "hotspot_reduction_pct": 56.0,
+    "cost_estimate_m": 170.2,
+    "cost_efficiency": 0.015
+  },
+  {
+    "scenario_id": "cool_roofs_first",
+    "name": "Cool Roofs First",
+    "description": "Cool roofs on all commercial/industrial buildings",
+    "interventions": {
+      "cool_roofs": 0.8
+    },
+    "mean_cooling_c": -1.51,
+    "max_cooling_c": -4.44,
+    "hotspots_before": 389,
+    "hotspots_after": 246,
+    "hotspot_reduction_pct": 36.8,
+    "cost_estimate_m": 116.7,
+    "cost_efficiency": 0.013
+  },
+  {
+    "scenario_id": "balanced_mix",
+    "name": "Balanced Mix",
+    "description": "Trees +10%, Cool Roofs +30%, Green Roofs 15%",
+    "interventions": {
+      "tree_cover": 0.35,
+      "cool_roofs": 0.3,
+      "green_roofs": 0.15
+    },
+    "mean_cooling_c": -2.12,
+    "max_cooling_c": -5.04,
+    "hotspots_before": 389,
+    "hotspots_after": 203,
+    "hotspot_reduction_pct": 47.8,
+    "cost_estimate_m": 187.2,
+    "cost_efficiency": 0.011
+  },
+  {
+    "scenario_id": "water_network",
+    "name": "Water Network",
+    "description": "Blue infrastructure \u2014 retention ponds + tree corridors",
+    "interventions": {
+      "water_bodies": 0.5,
+      "tree_cover": 0.3
+    },
+    "mean_cooling_c": -1.86,
+    "max_cooling_c": -4.77,
+    "hotspots_before": 389,
+    "hotspots_after": 225,
+    "hotspot_reduction_pct": 42.2,
+    "cost_estimate_m": 364.7,
+    "cost_efficiency": 0.005
+  },
+  {
+    "scenario_id": "maximum_cooling",
+    "name": "Maximum Cooling",
+    "description": "All interventions at maximum intensity",
+    "interventions": {
+      "tree_cover": 1.0,
+      "cool_roofs": 1.0,
+      "green_roofs": 1.0,
+      "water_bodies": 1.0,
+      "albedo_improvement": 1.0
+    },
+    "mean_cooling_c": -7.78,
+    "max_cooling_c": -10.53,
+    "hotspots_before": 389,
+    "hotspots_after": 53,
+    "hotspot_reduction_pct": 86.4,
+    "cost_estimate_m": 1458.8,
+    "cost_efficiency": 0.005
+  }
+]

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
-import { Map, BarChart2, Layers, ChevronDown, Sun, Moon } from 'lucide-react';
+import { Map, BarChart2, Layers, ChevronDown, Sun, Moon, Info } from 'lucide-react';
 import './App.css';
 import { API_BASE } from './api';
 import { useTheme } from './ThemeContext';
+import AboutModal from './components/AboutModal';
 
 import MapView from './pages/MapView';
 import DriversView from './pages/DriversView';
@@ -11,6 +12,7 @@ import ScenarioView from './pages/ScenarioView';
 
 function App() {
   const { theme, toggleTheme } = useTheme();
+  const [showAbout, setShowAbout] = useState(false);
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
   const [loadingCities, setLoadingCities] = useState(true);
@@ -81,10 +83,12 @@ function App() {
         </nav>
 
         <div className="sidebar-footer">
-          <div className="status-indicator">
-            <span className="dot pulse"></span>
-            Live Data
-          </div>
+          <button className="instructions-row" onClick={() => setShowAbout(true)}>
+            <span className="instructions-label">Instructions</span>
+            <span className="info-trigger">
+              <Info size={12} />
+            </span>
+          </button>
 
           <div className="theme-toggle-row">
             <span className="theme-toggle-label">
@@ -114,6 +118,8 @@ function App() {
           </Routes>
         )}
       </main>
+
+      {showAbout && <AboutModal onClose={() => setShowAbout(false)} />}
     </div>
   );
 }

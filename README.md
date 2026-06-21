@@ -1,6 +1,6 @@
 # Urban Heat Mitigation and cooling V1
 
-AI-powered urban heat island analysis and cooling-intervention simulator — covering **14 cities** (13 across India + Phoenix, AZ).
+AI-powered urban heat island analysis and cooling-intervention simulator — covering **20 Indian cities**.
 
 *Status: V1 — actively being improved.*
 
@@ -14,6 +14,8 @@ AI-powered urban heat island analysis and cooling-intervention simulator — cov
 - **Heat Map** — interactive grid map (Deck.gl + MapLibre) showing land surface temperature and hotspot tiers
 - **Driver Analysis** — SHAP-based explainability showing what's driving the heat in each grid cell
 - **Scenario Builder** — simulate cooling interventions (tree cover, reflective roofs, etc.) with a live before/after split view
+- **Light / Dark mode** — Apple-inspired light theme, toggle in the sidebar (persists across visits)
+- **LST vs Air Temperature explainer** — in-app modal clarifying what the displayed values actually measure
 
 ## Tech Stack
 
@@ -56,4 +58,4 @@ frontend/   React + Vite app
 
 ## How It Works
 
-One shared XGBoost model is trained across all 14 cities (rather than 14 separate models), so cross-validation uses a leave-cities-out split — a fair test of generalizing to a new city, not a preview of in-production accuracy. Every API endpoint takes a `?city=<id>` query param; add a new city by extending `CITIES` in `pipeline/config.py`.
+One shared XGBoost model is trained across all 20 cities (rather than 20 separate models), so cross-validation uses a leave-cities-out split — a fair test of generalizing to a new city, not a preview of in-production accuracy. Every API endpoint takes a `?city=<id>` query param; add a new city by extending `CITIES` in `pipeline/config.py`.

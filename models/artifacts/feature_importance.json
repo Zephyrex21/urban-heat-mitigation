@@ -1,112 +1,112 @@
 [
   {
     "feature": "air_temp_max",
-    "importance": 1.896,
+    "importance": 2.5018,
     "direction": "positive"
   },
   {
     "feature": "veg_imperv_ratio",
-    "importance": 1.1222,
+    "importance": 1.1079,
     "direction": "negative"
   },
   {
     "feature": "cooling_potential",
-    "importance": 0.3892,
+    "importance": 0.3203,
     "direction": "positive"
   },
   {
     "feature": "ndvi_mean",
-    "importance": 0.3123,
+    "importance": 0.2933,
     "direction": "negative"
   },
   {
     "feature": "frac_impervious",
-    "importance": 0.3073,
+    "importance": 0.2553,
     "direction": "positive"
   },
   {
     "feature": "wind_speed_mean",
-    "importance": 0.2369,
+    "importance": 0.2359,
     "direction": "negative"
   },
   {
     "feature": "road_density",
-    "importance": 0.2331,
-    "direction": "negative"
-  },
-  {
-    "feature": "sky_view_factor",
-    "importance": 0.1848,
+    "importance": 0.2203,
     "direction": "negative"
   },
   {
     "feature": "water_area_frac",
-    "importance": 0.1641,
+    "importance": 0.1852,
     "direction": "negative"
   },
   {
+    "feature": "sky_view_factor",
+    "importance": 0.1524,
+    "direction": "negative"
+  },
+  {
+    "feature": "thermal_mass_proxy",
+    "importance": 0.1499,
+    "direction": "positive"
+  },
+  {
     "feature": "solar_radiation",
-    "importance": 0.1387,
+    "importance": 0.1443,
     "direction": "positive"
   },
   {
     "feature": "building_density",
-    "importance": 0.1165,
+    "importance": 0.1113,
     "direction": "positive"
-  },
-  {
-    "feature": "thermal_mass_proxy",
-    "importance": 0.1164,
-    "direction": "positive"
-  },
-  {
-    "feature": "ndbi_mean",
-    "importance": 0.1079,
-    "direction": "positive"
-  },
-  {
-    "feature": "frac_water",
-    "importance": 0.092,
-    "direction": "negative"
   },
   {
     "feature": "frac_bare_soil",
-    "importance": 0.0892,
+    "importance": 0.1078,
+    "direction": "negative"
+  },
+  {
+    "feature": "frac_water",
+    "importance": 0.1052,
+    "direction": "negative"
+  },
+  {
+    "feature": "ndbi_mean",
+    "importance": 0.0923,
+    "direction": "positive"
+  },
+  {
+    "feature": "park_area_frac",
+    "importance": 0.0746,
     "direction": "negative"
   },
   {
     "feature": "frac_vegetation",
-    "importance": 0.0692,
-    "direction": "negative"
-  },
-  {
-    "feature": "park_area_frac",
-    "importance": 0.0663,
-    "direction": "negative"
-  },
-  {
-    "feature": "building_height_mean",
-    "importance": 0.0618,
+    "importance": 0.0739,
     "direction": "positive"
   },
   {
     "feature": "dist_to_water",
-    "importance": 0.0489,
-    "direction": "positive"
+    "importance": 0.0688,
+    "direction": "negative"
+  },
+  {
+    "feature": "building_height_mean",
+    "importance": 0.068,
+    "direction": "negative"
   },
   {
     "feature": "green_deficit",
-    "importance": 0.0422,
+    "importance": 0.0365,
     "direction": "positive"
   },
   {
     "feature": "tree_canopy_frac",
-    "importance": 0.0335,
+    "importance": 0.0287,
     "direction": "positive"
   },
   {
     "feature": "ndvi_std",
-    "importance": 0.0241,
+    "importance": 0.0212,
     "direction": "negative"
   }
 ]
