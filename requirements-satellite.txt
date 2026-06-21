@@ -1,0 +1,10 @@
+# Only needed to run pipeline/fetch_real_lst.py locally — NOT required
+# by the deployed API itself, so it's kept separate from requirements.txt
+# to avoid bloating the Render build.
+#
+# Install with:
+#   pip install -r requirements-satellite.txt
+
+pystac-client>=0.8.0
+planetary-computer>=1.0.0
+rasterstats>=0.19.0

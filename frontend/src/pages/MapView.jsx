@@ -8,6 +8,7 @@ import { API_BASE } from '../api';
 import { useTheme } from '../ThemeContext';
 import LstExplainerModal from '../components/LstExplainerModal';
 import ServerWakingNotice from '../components/ServerWakingNotice';
+import ValidationBadge from '../components/ValidationBadge';
 import './MapView.css';
 
 // Map basemap styles — switches with the app theme so the map matches
@@ -31,6 +32,7 @@ export default function MapView({ city, cityInfo }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showLstInfo, setShowLstInfo] = useState(false);
+  const [validation, setValidation] = useState(null);
 
   useEffect(() => {
     if (!city) return;
@@ -39,9 +41,10 @@ export default function MapView({ city, cityInfo }) {
 
     const fetchData = async () => {
       try {
-        const [gridRes, overviewRes] = await Promise.all([
+        const [gridRes, overviewRes, validationRes] = await Promise.all([
           fetch(`${API_BASE}/api/v1/grid?city=${city}`),
-          fetch(`${API_BASE}/api/v1/overview?city=${city}`)
+          fetch(`${API_BASE}/api/v1/overview?city=${city}`),
+          fetch(`${API_BASE}/api/v1/validation?city=${city}`).catch(() => null),
         ]);
 
         if (cancelled) return;
@@ -54,6 +57,15 @@ export default function MapView({ city, cityInfo }) {
         if (overviewRes.ok) {
           const data = await overviewRes.json();
           setOverview(data);
+        }
+
+        // Validation is best-effort — a missing/failed call just means
+        // this city has no real-satellite comparison yet, not an error.
+        if (validationRes && validationRes.ok) {
+          const data = await validationRes.json();
+          setValidation(data);
+        } else {
+          setValidation(null);
         }
 
         if (!gridRes.ok || !overviewRes.ok) {
@@ -191,6 +203,8 @@ Vegetation: ${(object.properties.frac_vegetation * 100).toFixed(1)}%`
               <div className="legend-item"><span className="color-box" style={{background: 'rgb(41, 121, 255)'}}></span> Cool</div>
             </div>
           </div>
+
+          <ValidationBadge validation={validation} />
         </div>
       )}
 

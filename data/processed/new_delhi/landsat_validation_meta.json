@@ -1,0 +1,16 @@
+{
+  "city_id": "new_delhi",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_147040_20260609_02_T1",
+  "scene_datetime": "2026-06-09T05:24:07.129771Z",
+  "cloud_cover_pct": 0.0,
+  "platform": "landsat-8",
+  "cells_covered": 6739,
+  "total_cells": 9792,
+  "validation": {
+    "rmse_c": 6.43,
+    "mae_c": 5.25,
+    "correlation": -0.473
+  },
+  "fetched_at": "2026-06-21T15:17:59.199212Z"
+}

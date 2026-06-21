@@ -1,0 +1,69 @@
+.validation-badge {
+  margin-top: 12px;
+}
+
+.validation-badge-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  background: rgba(0, 200, 83, 0.1);
+  border: 1px solid rgba(0, 200, 83, 0.25);
+  border-radius: var(--radius-md);
+  padding: 8px 10px;
+  color: var(--tier-normal);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.validation-badge-trigger span:first-of-type {
+  flex: 1;
+  text-align: left;
+}
+
+.validation-rmse {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.85;
+}
+
+.validation-detail {
+  margin-top: 8px;
+  background: var(--overlay-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  animation: validation-expand 0.2s ease;
+}
+
+@keyframes validation-expand {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.validation-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  padding: 4px 0;
+  color: var(--text-secondary);
+}
+
+.validation-row strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.validation-divider {
+  height: 1px;
+  background: var(--overlay-5);
+  margin: 6px 0;
+}
+
+.validation-note {
+  margin-top: 10px;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
