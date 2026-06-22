@@ -1,8 +1,8 @@
-# Urban Heat Mitigation and cooling V1
+# Urban Heat Mitigation and cooling V1.7
 
 AI-powered urban heat island analysis and cooling-intervention simulator — covering **20 Indian cities**.
 
-*Status: V1 — actively being improved.*
+*Status: V1.7 — actively being improved.*
 
 ## Live Demo
 
