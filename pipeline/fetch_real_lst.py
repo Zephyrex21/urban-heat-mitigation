@@ -133,28 +133,13 @@ def fetch_real_lst(city_id: str = "new_delhi", cloud_cover_max: int = 30):
     with rasterio.open(asset.href) as src:
         west, south, east, north = transform_bounds("EPSG:4326", src.crs, *bbox_list)
         window = from_bounds(west, south, east, north, transform=src.transform)
-        # boundless=True guarantees the returned array always has exactly the
-        # requested window's shape/geography, padding with fill_value for any
-        # part outside the scene's actual footprint. Without this, a window
-        # that partially exceeds the scene gets silently clipped by rasterio,
-        # but win_transform still describes the ORIGINAL (larger) window —
-        # an array/geography mismatch that corrupts every pixel lookup after it.
-        dn = src.read(1, window=window, boundless=True, fill_value=0).astype(np.float32)
+        dn = src.read(1, window=window).astype(np.float32)
         win_transform = src.window_transform(window)
         raster_crs = src.crs
 
     if dn.size == 0:
         print("Windowed read returned no data — bbox may not be covered by this scene.")
         raise FetchError(f"empty window read for '{city_id}'")
-
-    # Official USGS calibration: DN -> Kelvin -> Celsius
-    lst_kelvin = dn * LANDSAT_SCALE_FACTOR + LANDSAT_OFFSET
-    lst_celsius = lst_kelvin - 273.15
-    lst_celsius[(lst_celsius < -20) | (lst_celsius > 70)] = np.nan  # mask obvious bad pixels
-
-    valid_pct = 100 * np.sum(~np.isnan(lst_celsius)) / lst_celsius.size
-    print(f"  Real LST range : {np.nanmin(lst_celsius):.1f}°C to {np.nanmax(lst_celsius):.1f}°C "
-          f"({valid_pct:.0f}% valid pixels)")
 
     # --- Sanity check: confirm the windowed array is actually aligned with
     # geography the way we expect, before trusting any zonal stats from it.
@@ -183,8 +168,17 @@ def fetch_real_lst(city_id: str = "new_delhi", cloud_cover_max: int = 30):
         else:
             print("  [diagnostic] City center falls outside the windowed array bounds (unexpected).")
     else:
-        print("  [diagnostic] City center falls outside the computed window — bbox/center mismatch in config.py.")
+        print("  [diagnostic] City center falls outside the computed window — check bbox/CRS handling.")
     print()
+
+    # Official USGS calibration: DN -> Kelvin -> Celsius
+    lst_kelvin = dn * LANDSAT_SCALE_FACTOR + LANDSAT_OFFSET
+    lst_celsius = lst_kelvin - 273.15
+    lst_celsius[(lst_celsius < -20) | (lst_celsius > 70)] = np.nan  # mask obvious bad pixels
+
+    valid_pct = 100 * np.sum(~np.isnan(lst_celsius)) / lst_celsius.size
+    print(f"  Real LST range : {np.nanmin(lst_celsius):.1f}°C to {np.nanmax(lst_celsius):.1f}°C "
+          f"({valid_pct:.0f}% valid pixels)")
 
     # Zonal mean per grid cell, using this city's existing grid
     grid = gpd.read_file(grid_path)
