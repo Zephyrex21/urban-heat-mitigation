@@ -1,0 +1,16 @@
+{
+  "city_id": "mumbai",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_148046_20260413_02_T1",
+  "scene_datetime": "2026-04-13T05:33:10.754756Z",
+  "cloud_cover_pct": 0.84,
+  "platform": "landsat-8",
+  "cells_covered": 33,
+  "total_cells": 3864,
+  "validation": {
+    "rmse_c": 8.37,
+    "mae_c": 7.87,
+    "correlation": 0.15
+  },
+  "fetched_at": "2026-06-22T03:08:34.329290Z"
+}

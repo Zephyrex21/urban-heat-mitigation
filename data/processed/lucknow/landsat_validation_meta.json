@@ -1,0 +1,16 @@
+{
+  "city_id": "lucknow",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC09_L2SP_144042_20260527_02_T1",
+  "scene_datetime": "2026-05-27T05:06:35.564016Z",
+  "cloud_cover_pct": 0.0,
+  "platform": "landsat-9",
+  "cells_covered": 112,
+  "total_cells": 1800,
+  "validation": {
+    "rmse_c": 3.32,
+    "mae_c": 2.59,
+    "correlation": -0.214
+  },
+  "fetched_at": "2026-06-22T03:11:01.272179Z"
+}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
-import { Map, BarChart2, Layers, ChevronDown, Sun, Moon, Info } from 'lucide-react';
+import { Map, BarChart2, Layers, ChevronDown, Sun, Moon, Info, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import './App.css';
 import { API_BASE } from './api';
 import { useTheme } from './ThemeContext';
@@ -14,6 +14,17 @@ import ScenarioView from './pages/ScenarioView';
 function App() {
   const { theme, toggleTheme } = useTheme();
   const [showAbout, setShowAbout] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(
+    () => localStorage.getItem('urban-heat-sidebar-collapsed') === 'true'
+  );
+
+  const toggleSidebar = () => {
+    setSidebarCollapsed((c) => {
+      localStorage.setItem('urban-heat-sidebar-collapsed', String(!c));
+      return !c;
+    });
+  };
+
   const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState(null);
   const [loadingCities, setLoadingCities] = useState(true);
@@ -44,13 +55,20 @@ function App() {
   return (
     <div className="app-container">
       {/* Sidebar Navigation */}
-      <aside className="sidebar glass-panel">
+      <aside className={`sidebar glass-panel${sidebarCollapsed ? ' collapsed' : ''}`}>
         <div className="sidebar-header">
           <div className="logo-icon">🔥</div>
           <div className="logo-text">
             <h2>Urban Heat</h2>
             <p>Urban Heat Island Tracker</p>
           </div>
+          <button
+            className="sidebar-collapse-btn"
+            onClick={toggleSidebar}
+            aria-label="Collapse sidebar"
+          >
+            <PanelLeftClose size={16} />
+          </button>
         </div>
 
         <div className="city-selector-wrap">
@@ -116,6 +134,16 @@ function App() {
           </div>
         </div>
       </aside>
+
+      {sidebarCollapsed && (
+        <button
+          className="sidebar-restore-btn"
+          onClick={toggleSidebar}
+          aria-label="Expand sidebar"
+        >
+          <PanelLeftOpen size={18} />
+        </button>
+      )}
 
       {/* Main Content Area */}
       <main className="main-content">

@@ -1,0 +1,16 @@
+{
+  "city_id": "bengaluru",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_144051_20260401_02_T1",
+  "scene_datetime": "2026-04-01T05:10:29.665872Z",
+  "cloud_cover_pct": 0.23,
+  "platform": "landsat-8",
+  "cells_covered": 4225,
+  "total_cells": 4225,
+  "validation": {
+    "rmse_c": 8.06,
+    "mae_c": 7.15,
+    "correlation": -0.338
+  },
+  "fetched_at": "2026-06-22T03:08:58.228257Z"
+}

@@ -1,0 +1,16 @@
+{
+  "city_id": "bhopal",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_145044_20260526_02_T1",
+  "scene_datetime": "2026-05-26T05:13:20.660058Z",
+  "cloud_cover_pct": 0.0,
+  "platform": "landsat-8",
+  "cells_covered": 2346,
+  "total_cells": 2346,
+  "validation": {
+    "rmse_c": 9.68,
+    "mae_c": 8.54,
+    "correlation": -0.337
+  },
+  "fetched_at": "2026-06-22T03:12:41.042157Z"
+}

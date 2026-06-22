@@ -111,11 +111,13 @@ export default function AboutModal({ onClose }) {
               match how Indian cities are actually laid out, not pulled
               from live satellite imagery. We're upfront about this: it's a
               demonstration model built on real climate science, not a live
-              monitoring feed. Where you see the{' '}
-              <strong>"Verified against real Landsat data"</strong> badge
-              on the map, that city's estimate has been directly
+              monitoring feed. Where you see a{' '}
+              <strong>"Verified" or "Compared against real Landsat data"</strong>{' '}
+              badge on the map, that city's estimate has been directly
               cross-checked against an actual Landsat satellite thermal
-              measurement, cell by cell.
+              measurement, cell by cell — the badge is honest about how
+              closely they actually matched, not just whether we ran the
+              comparison.
             </p>
           </div>
         </div>

@@ -1,0 +1,16 @@
+{
+  "city_id": "hyderabad",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_144048_20260401_02_T1",
+  "scene_datetime": "2026-04-01T05:09:17.954627Z",
+  "cloud_cover_pct": 0.07,
+  "platform": "landsat-8",
+  "cells_covered": 4290,
+  "total_cells": 4290,
+  "validation": {
+    "rmse_c": 3.72,
+    "mae_c": 2.91,
+    "correlation": -0.018
+  },
+  "fetched_at": "2026-06-22T03:10:05.664443Z"
+}

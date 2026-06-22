@@ -1,0 +1,16 @@
+{
+  "city_id": "pune",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC09_L2SP_147047_20260414_02_T1",
+  "scene_datetime": "2026-04-14T05:27:36.180174Z",
+  "cloud_cover_pct": 0.0,
+  "platform": "landsat-9",
+  "cells_covered": 1892,
+  "total_cells": 1892,
+  "validation": {
+    "rmse_c": 11.03,
+    "mae_c": 9.77,
+    "correlation": -0.452
+  },
+  "fetched_at": "2026-06-22T03:10:25.325851Z"
+}

@@ -1,0 +1,16 @@
+{
+  "city_id": "surat",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_148045_20260413_02_T1",
+  "scene_datetime": "2026-04-13T05:32:46.859481Z",
+  "cloud_cover_pct": 0.0,
+  "platform": "landsat-8",
+  "cells_covered": 1892,
+  "total_cells": 1892,
+  "validation": {
+    "rmse_c": 5.89,
+    "mae_c": 5.11,
+    "correlation": 0.246
+  },
+  "fetched_at": "2026-06-22T03:11:16.226879Z"
+}

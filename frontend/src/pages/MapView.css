@@ -47,6 +47,8 @@
   top: 24px;
   right: 24px;
   width: 320px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
   padding: 20px;
   z-index: 10;
 }
@@ -55,7 +57,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .kpi-header h3 {
@@ -78,7 +80,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 .kpi-card {
@@ -116,25 +118,27 @@
   font-size: 12px;
   color: var(--text-secondary);
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .legend-items {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 10px;
 }
 
 .legend-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
+  gap: 6px;
+  font-size: 12px;
+  white-space: nowrap;
 }
 
 .color-box {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 3px;
   box-shadow: 0 0 5px var(--overlay-6);
+  flex-shrink: 0;
 }

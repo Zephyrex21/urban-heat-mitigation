@@ -1,0 +1,16 @@
+{
+  "city_id": "chandigarh",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_147039_20260422_02_T1",
+  "scene_datetime": "2026-04-22T05:24:09.735765Z",
+  "cloud_cover_pct": 0.01,
+  "platform": "landsat-8",
+  "cells_covered": 986,
+  "total_cells": 986,
+  "validation": {
+    "rmse_c": 3.3,
+    "mae_c": 2.63,
+    "correlation": -0.153
+  },
+  "fetched_at": "2026-06-22T03:11:42.891995Z"
+}

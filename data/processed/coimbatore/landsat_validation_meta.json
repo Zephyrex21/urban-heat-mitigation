@@ -1,0 +1,16 @@
+{
+  "city_id": "coimbatore",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_144052_20260401_02_T1",
+  "scene_datetime": "2026-04-01T05:10:53.569621Z",
+  "cloud_cover_pct": 6.02,
+  "platform": "landsat-8",
+  "cells_covered": 1938,
+  "total_cells": 1938,
+  "validation": {
+    "rmse_c": 7.9,
+    "mae_c": 6.94,
+    "correlation": 0.032
+  },
+  "fetched_at": "2026-06-22T03:13:34.713607Z"
+}

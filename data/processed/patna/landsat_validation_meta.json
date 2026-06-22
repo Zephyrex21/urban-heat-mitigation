@@ -1,0 +1,16 @@
+{
+  "city_id": "patna",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_141042_20260412_02_T1",
+  "scene_datetime": "2026-04-12T04:48:19.691842Z",
+  "cloud_cover_pct": 0.47,
+  "platform": "landsat-8",
+  "cells_covered": 2343,
+  "total_cells": 2343,
+  "validation": {
+    "rmse_c": 6.63,
+    "mae_c": 5.49,
+    "correlation": -0.097
+  },
+  "fetched_at": "2026-06-22T03:12:20.443842Z"
+}

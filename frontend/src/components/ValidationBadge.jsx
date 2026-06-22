@@ -13,11 +13,18 @@ export default function ValidationBadge({ validation }) {
     year: 'numeric', month: 'short', day: 'numeric',
   }) : null;
 
+  // Be honest about how well the synthetic estimate actually matched —
+  // a correlation this low means the spatial pattern genuinely differs,
+  // which is a real finding, not something to badge as "verified."
+  const corr = stats?.correlation;
+  const isGoodMatch = corr !== undefined && corr !== null && corr >= 0.4;
+  const label = isGoodMatch ? 'Verified against real Landsat data' : 'Compared against real Landsat data';
+
   return (
-    <div className={`validation-badge${expanded ? ' expanded' : ''}`}>
+    <div className={`validation-badge${expanded ? ' expanded' : ''}${isGoodMatch ? '' : ' weak-match'}`}>
       <button className="validation-badge-trigger" onClick={() => setExpanded((e) => !e)}>
         <Satellite size={13} />
-        <span>Verified against real Landsat data</span>
+        <span>{label}</span>
         {stats && <span className="validation-rmse">±{stats.rmse_c}°C</span>}
         {expanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
       </button>
@@ -54,9 +61,9 @@ export default function ValidationBadge({ validation }) {
             </>
           )}
           <p className="validation-note">
-            This city's synthetic temperature estimate was checked cell-by-cell
-            against a real Landsat thermal measurement — the numbers above show
-            how close they came.
+            {isGoodMatch
+              ? "This city's synthetic temperature estimate was checked cell-by-cell against a real Landsat thermal measurement — the numbers above show how close they came."
+              : "This city's synthetic spatial pattern was checked against a real Landsat thermal measurement from a single overpass. The absolute temperature range was in the right ballpark, but the within-city pattern didn't closely track this particular scene — shown here transparently rather than rounded up to a false \"verified.\""}
           </p>
         </div>
       )}

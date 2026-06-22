@@ -1,0 +1,12 @@
+{
+  "city_id": "guwahati",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_137042_20260502_02_T2",
+  "scene_datetime": "2026-05-02T04:23:28.316270Z",
+  "cloud_cover_pct": 15.02,
+  "platform": "landsat-8",
+  "cells_covered": 0,
+  "total_cells": 2244,
+  "validation": null,
+  "fetched_at": "2026-06-22T03:13:12.263981Z"
+}

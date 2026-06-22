@@ -1,0 +1,16 @@
+{
+  "city_id": "nagpur",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_144045_20260503_02_T1",
+  "scene_datetime": "2026-05-03T05:07:54.242816Z",
+  "cloud_cover_pct": 0.0,
+  "platform": "landsat-8",
+  "cells_covered": 2596,
+  "total_cells": 2596,
+  "validation": {
+    "rmse_c": 7.47,
+    "mae_c": 6.22,
+    "correlation": -0.391
+  },
+  "fetched_at": "2026-06-22T03:12:05.719135Z"
+}

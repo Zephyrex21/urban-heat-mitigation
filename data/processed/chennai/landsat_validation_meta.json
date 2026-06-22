@@ -1,0 +1,16 @@
+{
+  "city_id": "chennai",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_142051_20260606_02_T1",
+  "scene_datetime": "2026-06-06T04:57:36.151297Z",
+  "cloud_cover_pct": 1.84,
+  "platform": "landsat-8",
+  "cells_covered": 2774,
+  "total_cells": 2774,
+  "validation": {
+    "rmse_c": 9.68,
+    "mae_c": 8.8,
+    "correlation": 0.028
+  },
+  "fetched_at": "2026-06-22T03:09:21.179920Z"
+}

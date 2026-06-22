@@ -1,0 +1,16 @@
+{
+  "city_id": "visakhapatnam",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_141048_20260412_02_T1",
+  "scene_datetime": "2026-04-12T04:50:43.080446Z",
+  "cloud_cover_pct": 4.65,
+  "platform": "landsat-8",
+  "cells_covered": 2385,
+  "total_cells": 2385,
+  "validation": {
+    "rmse_c": 5.35,
+    "mae_c": 4.37,
+    "correlation": 0.225
+  },
+  "fetched_at": "2026-06-22T03:12:56.489850Z"
+}

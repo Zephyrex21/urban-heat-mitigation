@@ -1,0 +1,16 @@
+{
+  "city_id": "vijayawada",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_142048_20260419_02_T1",
+  "scene_datetime": "2026-04-19T04:56:51.598776Z",
+  "cloud_cover_pct": 2.56,
+  "platform": "landsat-8",
+  "cells_covered": 163,
+  "total_cells": 1548,
+  "validation": {
+    "rmse_c": 4.29,
+    "mae_c": 3.54,
+    "correlation": -0.181
+  },
+  "fetched_at": "2026-06-22T03:13:21.942132Z"
+}

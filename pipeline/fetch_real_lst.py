@@ -79,6 +79,11 @@ def _search_best_scene(catalog, bbox_list, cloud_cover_max=30):
     return None
 
 
+class FetchError(Exception):
+    """Raised when a single city's fetch fails — lets batch runs skip and continue."""
+    pass
+
+
 def fetch_real_lst(city_id: str = "new_delhi", cloud_cover_max: int = 30):
     try:
         import pystac_client
@@ -87,11 +92,11 @@ def fetch_real_lst(city_id: str = "new_delhi", cloud_cover_max: int = 30):
     except ImportError:
         print("Missing packages. Run:")
         print("  pip install pystac-client planetary-computer rasterstats")
-        sys.exit(1)
+        raise FetchError("missing satellite packages")
 
     if city_id not in CITIES:
         print(f"Unknown city_id '{city_id}'. Available: {', '.join(CITIES.keys())}")
-        sys.exit(1)
+        raise FetchError(f"unknown city_id '{city_id}'")
 
     city = CITIES[city_id]
     bbox = city["bbox"]
@@ -102,7 +107,7 @@ def fetch_real_lst(city_id: str = "new_delhi", cloud_cover_max: int = 30):
     if not grid_path.exists():
         print(f"No grid found at {grid_path}.")
         print(f"Run `python -m pipeline.generate_synthetic {city_id}` first.")
-        sys.exit(1)
+        raise FetchError(f"no grid for '{city_id}'")
 
     print(f"Searching Landsat Collection 2 Level-2 for {city['name']}, {city['state']}...")
 
@@ -112,7 +117,7 @@ def fetch_real_lst(city_id: str = "new_delhi", cloud_cover_max: int = 30):
     if item is None:
         print(f"No scenes found under {cloud_cover_max}% cloud cover in the last 2 years.")
         print("Try increasing cloud_cover_max, or check your internet connection.")
-        sys.exit(1)
+        raise FetchError(f"no suitable scene for '{city_id}'")
 
     print(f"  Selected scene : {item.id}")
     print(f"  Date           : {item.properties['datetime']}")
@@ -122,19 +127,25 @@ def fetch_real_lst(city_id: str = "new_delhi", cloud_cover_max: int = 30):
     asset = item.assets.get("lwir11") or item.assets.get("ST_B10")
     if asset is None:
         print("Surface temperature band not found on this scene.")
-        sys.exit(1)
+        raise FetchError(f"no thermal band asset for '{city_id}'")
 
     print("Reading thermal band (windowed to city bbox only — no full download)...")
     with rasterio.open(asset.href) as src:
         west, south, east, north = transform_bounds("EPSG:4326", src.crs, *bbox_list)
         window = from_bounds(west, south, east, north, transform=src.transform)
-        dn = src.read(1, window=window).astype(np.float32)
+        # boundless=True guarantees the returned array always has exactly the
+        # requested window's shape/geography, padding with fill_value for any
+        # part outside the scene's actual footprint. Without this, a window
+        # that partially exceeds the scene gets silently clipped by rasterio,
+        # but win_transform still describes the ORIGINAL (larger) window —
+        # an array/geography mismatch that corrupts every pixel lookup after it.
+        dn = src.read(1, window=window, boundless=True, fill_value=0).astype(np.float32)
         win_transform = src.window_transform(window)
         raster_crs = src.crs
 
     if dn.size == 0:
         print("Windowed read returned no data — bbox may not be covered by this scene.")
-        sys.exit(1)
+        raise FetchError(f"empty window read for '{city_id}'")
 
     # Official USGS calibration: DN -> Kelvin -> Celsius
     lst_kelvin = dn * LANDSAT_SCALE_FACTOR + LANDSAT_OFFSET
@@ -144,6 +155,36 @@ def fetch_real_lst(city_id: str = "new_delhi", cloud_cover_max: int = 30):
     valid_pct = 100 * np.sum(~np.isnan(lst_celsius)) / lst_celsius.size
     print(f"  Real LST range : {np.nanmin(lst_celsius):.1f}°C to {np.nanmax(lst_celsius):.1f}°C "
           f"({valid_pct:.0f}% valid pixels)")
+
+    # --- Sanity check: confirm the windowed array is actually aligned with
+    # geography the way we expect, before trusting any zonal stats from it.
+    # We independently sample the raster at the city's known center point
+    # two different ways and confirm they agree. If they don't, something
+    # in the windowing/CRS handling is flipped or offset.
+    import pyproj
+    from rasterio.transform import rowcol as _rowcol
+
+    to_raster_crs = pyproj.Transformer.from_crs("EPSG:4326", raster_crs, always_xy=True)
+    center_lon, center_lat = city["center"]
+    cx, cy = to_raster_crs.transform(center_lon, center_lat)
+    win_west, win_south, win_east, win_north = rasterio.transform.array_bounds(
+        dn.shape[0], dn.shape[1], win_transform
+    )
+    print(f"\n  [diagnostic] Window bounds (raster CRS): "
+          f"({win_west:.0f}, {win_south:.0f}) to ({win_east:.0f}, {win_north:.0f})")
+    print(f"  [diagnostic] City center in raster CRS  : ({cx:.0f}, {cy:.0f})")
+
+    if win_west <= cx <= win_east and win_south <= cy <= win_north:
+        r, c = _rowcol(win_transform, cx, cy)
+        if 0 <= r < dn.shape[0] and 0 <= c < dn.shape[1]:
+            center_val = lst_celsius[r, c]
+            print(f"  [diagnostic] LST directly under city center (row={r}, col={c}): "
+                  f"{center_val:.1f}°C")
+        else:
+            print("  [diagnostic] City center falls outside the windowed array bounds (unexpected).")
+    else:
+        print("  [diagnostic] City center falls outside the computed window — bbox/center mismatch in config.py.")
+    print()
 
     # Zonal mean per grid cell, using this city's existing grid
     grid = gpd.read_file(grid_path)
@@ -158,6 +199,23 @@ def fetch_real_lst(city_id: str = "new_delhi", cloud_cover_max: int = 30):
     )
     grid["lst_satellite_c"] = [s["mean"] for s in stats]
     cells_covered = int(sum(1 for s in stats if s["mean"] is not None))
+
+    # Cross-check: find whichever grid cell contains the city center and
+    # compare its zonal_stats mean against the direct pixel sample above.
+    # These should be close (same physical location, two methods). A large
+    # mismatch points squarely at a bug in the zonal_stats/grid alignment
+    # step rather than the raw raster read.
+    try:
+        from shapely.geometry import Point
+        center_point = Point(*city["center"])
+        containing = grid[grid.geometry.contains(center_point)]
+        if len(containing) > 0:
+            cell_val = containing.iloc[0]["lst_satellite_c"]
+            print(f"  [diagnostic] Zonal-stats value for the cell at city center: "
+                  f"{cell_val:.1f}°C  (compare to the direct pixel sample above — "
+                  f"should be within ~1-2°C of each other)\n")
+    except Exception as diag_err:
+        print(f"  [diagnostic] Cross-check skipped: {diag_err}\n")
 
     # Compare against the synthetic estimate already shown in the app
     validation = None
@@ -201,9 +259,61 @@ def fetch_real_lst(city_id: str = "new_delhi", cloud_cover_max: int = 30):
 
     print(f"\nSaved: {out_path}")
     print(f"Saved: {meta_path}")
-    print("\nDone. Restart the API server — it will pick this up automatically.")
+    print("Done.\n")
+    return meta
+
+
+def fetch_many(city_ids, cloud_cover_max: int = 30, pause_seconds: float = 1.0):
+    """
+    Run fetch_real_lst for several cities in one go, continuing past any
+    individual failures (cloud cover, no scene found, network hiccup, etc.)
+    and printing a summary table at the end.
+    """
+    import time
+
+    results = []
+    for i, city_id in enumerate(city_ids, 1):
+        print(f"\n{'=' * 60}")
+        print(f"[{i}/{len(city_ids)}] {city_id}")
+        print('=' * 60)
+        try:
+            meta = fetch_real_lst(city_id, cloud_cover_max=cloud_cover_max)
+            results.append({"city_id": city_id, "status": "ok", "meta": meta})
+        except FetchError as e:
+            print(f"  SKIPPED: {e}")
+            results.append({"city_id": city_id, "status": "skipped", "error": str(e)})
+        except Exception as e:
+            print(f"  FAILED: {e}")
+            results.append({"city_id": city_id, "status": "failed", "error": str(e)})
+
+        if i < len(city_ids):
+            time.sleep(pause_seconds)  # be polite to the free public API
+
+    print(f"\n\n{'=' * 60}")
+    print("BATCH SUMMARY")
+    print('=' * 60)
+    for r in results:
+        if r["status"] == "ok":
+            v = r["meta"].get("validation")
+            tag = f"RMSE {v['rmse_c']}°C, corr {v['correlation']}" if v else "no comparison data"
+            print(f"  OK       {r['city_id']:<16} {tag}")
+        else:
+            print(f"  {r['status'].upper():<9}{r['city_id']:<16} {r.get('error', '')}")
+
+    ok_count = sum(1 for r in results if r["status"] == "ok")
+    print(f"\n{ok_count}/{len(city_ids)} cities completed successfully.")
+    return results
 
 
 if __name__ == "__main__":
-    target_city = sys.argv[1] if len(sys.argv) > 1 else "new_delhi"
-    fetch_real_lst(target_city)
+    if len(sys.argv) > 1 and sys.argv[1] == "all":
+        fetch_many(list(CITIES.keys()))
+    elif len(sys.argv) > 1 and "," in sys.argv[1]:
+        fetch_many([c.strip() for c in sys.argv[1].split(",")])
+    else:
+        target_city = sys.argv[1] if len(sys.argv) > 1 else "new_delhi"
+        try:
+            fetch_real_lst(target_city)
+        except FetchError as e:
+            print(f"\nFailed: {e}")
+            sys.exit(1)

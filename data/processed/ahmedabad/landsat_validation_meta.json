@@ -1,0 +1,16 @@
+{
+  "city_id": "ahmedabad",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_148044_20260515_02_T1",
+  "scene_datetime": "2026-05-15T05:31:55.452179Z",
+  "cloud_cover_pct": 0.0,
+  "platform": "landsat-8",
+  "cells_covered": 2258,
+  "total_cells": 2288,
+  "validation": {
+    "rmse_c": 5.46,
+    "mae_c": 4.54,
+    "correlation": -0.155
+  },
+  "fetched_at": "2026-06-22T03:10:38.044666Z"
+}

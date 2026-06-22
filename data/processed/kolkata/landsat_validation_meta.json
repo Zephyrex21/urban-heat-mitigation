@@ -1,0 +1,16 @@
+{
+  "city_id": "kolkata",
+  "source": "Landsat Collection 2 Level-2 Surface Temperature (USGS/NASA, via Microsoft Planetary Computer)",
+  "scene_id": "LC08_L2SP_138044_20260423_02_T1",
+  "scene_datetime": "2026-04-23T04:30:32.366447Z",
+  "cloud_cover_pct": 4.56,
+  "platform": "landsat-8",
+  "cells_covered": 1845,
+  "total_cells": 1845,
+  "validation": {
+    "rmse_c": 4.01,
+    "mae_c": 3.16,
+    "correlation": 0.297
+  },
+  "fetched_at": "2026-06-22T03:09:38.698957Z"
+}
