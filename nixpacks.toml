@@ -1,0 +1,5 @@
+[phases.setup]
+nixPkgs = ["python310", "gdal", "geos", "proj"]
+
+[start]
+cmd = "uvicorn api.main:app --host 0.0.0.0 --port $PORT"
