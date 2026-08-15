@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="500" viewBox="0 0 1600 500">
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F3F5F0"/><stop offset=".55" stop-color="#E7EEE5"/><stop offset="1" stop-color="#DCE7E2"/></linearGradient>
+ <linearGradient id="green" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2F9E72"/><stop offset="1" stop-color="#167A63"/></linearGradient>
+ <linearGradient id="heat" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#3B82F6"/><stop offset=".45" stop-color="#F2C94C"/><stop offset=".72" stop-color="#F2994A"/><stop offset="1" stop-color="#EB5757"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#5BAF8A" stop-opacity=".20"/><stop offset="1" stop-color="#5BAF8A" stop-opacity="0"/></radialGradient>
+ <filter id="shadow"><feDropShadow dx="0" dy="15" stdDeviation="22" flood-color="#718276" flood-opacity=".28"/><feDropShadow dx="-6" dy="-6" stdDeviation="12" flood-color="#FFFFFF" flood-opacity=".75"/></filter>
+ <style>
+ .m{font:700 13px "Plus Jakarta Sans",Arial,sans-serif;letter-spacing:3px;fill:#2D8A70}.t{font:700 66px "Plus Jakarta Sans",Arial,sans-serif;fill:#29352F}.s{font:500 23px "Plus Jakarta Sans",Arial,sans-serif;fill:#69756F}.p{font:700 12px "Plus Jakarta Sans",Arial,sans-serif;letter-spacing:1px;fill:#51605A}.u{font:600 11px "JetBrains Mono",Consolas,monospace;fill:#5F6D67}
+ </style>
+</defs>
+<rect width="1600" height="500" rx="28" fill="url(#bg)"/><circle cx="1370" cy="80" r="350" fill="url(#glow)"/>
+<g opacity=".08" stroke="#718276" stroke-width="1"><path d="M0 100H1600M0 200H1600M0 300H1600M0 400H1600"/><path d="M120 0V500M240 0V500M360 0V500M480 0V500M600 0V500M720 0V500M840 0V500M960 0V500M1080 0V500M1200 0V500M1320 0V500M1440 0V500"/></g>
+<g transform="translate(88,82)"><text class="m">URBAN CLIMATE INTELLIGENCE</text><text y="88" class="t">Urban Heat Mitigation</text><text y="130" class="s">Map heat exposure, identify vulnerable zones, and explore mitigation strategies.</text><text y="164" class="s">Turn spatial data into practical urban cooling decisions.</text>
+<g transform="translate(0,208)"><rect width="104" height="34" rx="17" fill="#F7FAF5" stroke="#C9D8CF"/><text x="52" y="22" text-anchor="middle" class="p">HEAT MAPS</text><rect x="116" width="108" height="34" rx="17" fill="#F7FAF5" stroke="#C9D8CF"/><text x="170" y="22" text-anchor="middle" class="p">SPATIAL DATA</text><rect x="236" width="110" height="34" rx="17" fill="#F7FAF5" stroke="#C9D8CF"/><text x="291" y="22" text-anchor="middle" class="p">RISK ZONES</text><rect x="358" width="122" height="34" rx="17" fill="#F7FAF5" stroke="#C9D8CF"/><text x="419" y="22" text-anchor="middle" class="p">MITIGATION</text></g></g>
+<g transform="translate(1015,58)" filter="url(#shadow)"><rect width="480" height="380" rx="32" fill="#F8FAF7"/><rect x="22" y="22" width="436" height="336" rx="25" fill="#E8EEE8" stroke="#D1DBD3"/>
+<rect x="48" y="48" width="160" height="246" rx="18" fill="#DCE7E0"/><path d="M62 80h132M62 115h132M62 150h132M62 185h132M62 220h132M88 58v222M125 58v222M162 58v222" stroke="#B4C2B8" stroke-width="2" opacity=".55"/><circle cx="132" cy="155" r="70" fill="url(#heat)" opacity=".8"/><circle cx="102" cy="185" r="34" fill="#EB5757" opacity=".45"/><circle cx="160" cy="130" r="32" fill="#F2C94C" opacity=".45"/>
+<g transform="translate(230,58)"><text class="u">HEAT EXPOSURE</text><rect y="28" width="190" height="16" rx="8" fill="#DCE3DD"/><rect y="28" width="148" height="16" rx="8" fill="url(#heat)"/><text y="72" class="u">VULNERABILITY</text><rect y="86" width="190" height="16" rx="8" fill="#DCE3DD"/><rect y="86" width="120" height="16" rx="8" fill="url(#green)"/><text y="130" class="u">MITIGATION IMPACT</text><rect y="144" width="190" height="16" rx="8" fill="#DCE3DD"/><rect y="144" width="162" height="16" rx="8" fill="#4C9A7B"/><rect y="184" width="190" height="52" rx="15" fill="#F4F7F3" stroke="#CAD7CF"/><text x="16" y="206" class="u">COOLING STRATEGY</text><text x="16" y="224" class="u">Trees + shade + reflective cover</text></g>
+</g>
+<text x="88" y="450" class="m" opacity=".72">SATELLITE / SENSOR DATA • SPATIAL ANALYSIS • EXPOSURE • MITIGATION</text><text x="1498" y="450" text-anchor="end" class="u" opacity=".52">URBAN HEAT MITIGATION</text>
+</svg>
