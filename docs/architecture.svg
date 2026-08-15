@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F3F5F0"/><stop offset="1" stop-color="#E1EAE5"/></linearGradient>
+<linearGradient id="data" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#E5EFF8"/><stop offset="1" stop-color="#D4E4F0"/></linearGradient>
+<linearGradient id="ml" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#EEEAFD"/><stop offset="1" stop-color="#DDD7F6"/></linearGradient>
+<linearGradient id="ui" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#E5F3EC"/><stop offset="1" stop-color="#D1E8DA"/></linearGradient>
+<linearGradient id="scenario" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF0E3"/><stop offset="1" stop-color="#F5DEC9"/></linearGradient>
+<filter id="shadow"><feDropShadow dx="0" dy="10" stdDeviation="13" flood-color="#7A8A80" flood-opacity=".20"/></filter>
+<marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#77857D"/></marker>
+<style>
+.t{font:700 34px "Plus Jakarta Sans",Arial,sans-serif;fill:#2E3933}.sub{font:500 17px "Plus Jakarta Sans",Arial,sans-serif;fill:#68746D}.h{font:700 19px "Plus Jakarta Sans",Arial,sans-serif;fill:#344039}.p{font:500 13px "Plus Jakarta Sans",Arial,sans-serif;fill:#65716B}.m{font:700 11px "Plus Jakarta Sans",Arial,sans-serif;fill:#2D8A70;letter-spacing:2px}.mono{font:600 11px "JetBrains Mono",Consolas,monospace;fill:#5F6C66}
+</style>
+</defs>
+<rect width="1600" height="900" rx="28" fill="url(#bg)"/>
+<text x="70" y="62" class="t">Urban Heat Mitigation — Architecture</text>
+<text x="70" y="92" class="sub">Spatial heat data → ML analysis → explainability → interactive mitigation scenarios</text>
+
+<text x="70" y="145" class="m">DATA + FEATURE ENGINEERING</text>
+<g filter="url(#shadow)"><rect x="70" y="165" width="330" height="125" rx="22" fill="url(#data)"/><rect x="455" y="165" width="330" height="125" rx="22" fill="url(#data)"/><rect x="840" y="165" width="330" height="125" rx="22" fill="url(#data)"/><rect x="1225" y="165" width="305" height="125" rx="22" fill="#F8FAF7"/></g>
+<text x="100" y="202" class="h">City Data</text><text x="100" y="230" class="p">20 Indian cities</text><text x="100" y="251" class="p">Processed spatial grids</text>
+<text x="485" y="202" class="h">Feature Engineering</text><text x="485" y="230" class="p">Urban / environmental features</text><text x="485" y="251" class="p">City-aware preprocessing</text>
+<text x="870" y="202" class="h">GeoParquet Storage</text><text x="870" y="230" class="p">Per-city processed datasets</text><text x="870" y="251" class="p">Scenario presets</text>
+<text x="1255" y="202" class="h">Pipeline Config</text><text x="1255" y="230" class="p">City registry + model inputs</text><text x="1255" y="251" class="p">Extensible city selection</text>
+<path d="M400 227H455M785 227H840M1170 227H1225" stroke="#77857D" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+<text x="70" y="350" class="m">MODEL + EXPLAINABILITY</text>
+<g filter="url(#shadow)"><rect x="70" y="370" width="350" height="150" rx="22" fill="url(#ml)"/><rect x="470" y="370" width="350" height="150" rx="22" fill="url(#ml)"/><rect x="870" y="370" width="290" height="150" rx="22" fill="#F6F6F2"/><rect x="1210" y="370" width="320" height="150" rx="22" fill="url(#ui)"/></g>
+<text x="100" y="408" class="h">XGBoost Model</text><text x="100" y="436" class="p">One shared model across cities</text><text x="100" y="457" class="p">Leave-cities-out validation</text><text x="100" y="478" class="p">Generalization-oriented evaluation</text>
+<text x="500" y="408" class="h">SHAP Explainability</text><text x="500" y="436" class="p">Feature attribution per grid cell</text><text x="500" y="457" class="p">Heat-driver analysis</text><text x="500" y="478" class="p">Interpretable model outputs</text>
+<text x="900" y="408" class="h">Trained Artifacts</text><text x="900" y="436" class="p">Versioned model outputs</text><text x="900" y="457" class="p">Reusable at API runtime</text>
+<text x="1240" y="408" class="h">Scenario Engine</text><text x="1240" y="436" class="p">Tree cover</text><text x="1240" y="457" class="p">Reflective roofs</text><text x="1240" y="478" class="p">Before / after simulation</text>
+<path d="M400 445H470M820 445H870M1160 445H1210" stroke="#77857D" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+
+<text x="70" y="580" class="m">API + VISUALIZATION</text>
+<g filter="url(#shadow)"><rect x="70" y="600" width="350" height="140" rx="22" fill="#F8FAF7"/><rect x="470" y="600" width="350" height="140" rx="22" fill="#F8FAF7"/><rect x="870" y="600" width="290" height="140" rx="22" fill="url(#scenario)"/><rect x="1210" y="600" width="320" height="140" rx="22" fill="#F8FAF7"/></g>
+<text x="100" y="638" class="h">FastAPI</text><text x="100" y="666" class="p">Grid / hotspot endpoints</text><text x="100" y="687" class="p">Driver analysis + scenarios</text><text x="100" y="708" class="p">City query routing</text>
+<text x="500" y="638" class="h">React + Vite</text><text x="500" y="666" class="p">Interactive application shell</text><text x="500" y="687" class="p">City selection + state</text><text x="500" y="708" class="p">Dashboard visualization</text>
+<text x="900" y="638" class="h">Deck.gl + MapLibre</text><text x="900" y="666" class="p">Heat grid maps</text><text x="900" y="687" class="p">Hotspot tiers + spatial layers</text>
+<text x="1240" y="638" class="h">Recharts</text><text x="1240" y="666" class="p">Analytical charts</text><text x="1240" y="687" class="p">Driver / scenario comparisons</text>
+<path d="M245 520V600M645 520V600M1015 520V600M1370 520V600" stroke="#77857D" stroke-width="2" fill="none" stroke-dasharray="8 8" marker-end="url(#arrow)"/>
+
+<text x="70" y="805" class="m">USER FLOW</text>
+<rect x="70" y="825" width="1460" height="48" rx="18" fill="#FFFFFF" opacity=".84"/>
+<text x="800" y="855" text-anchor="middle" class="mono">Select city → view heat map → inspect hotspots → explain drivers → simulate interventions → compare impact</text>
+</svg>
