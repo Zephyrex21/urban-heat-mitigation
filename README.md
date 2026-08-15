@@ -1,61 +1,189 @@
-# Urban Heat Mitigation and cooling V1.6
+<p align="center">
+  <img src="docs/banner.svg" alt="Urban Heat Mitigation" width="100%">
+</p>
 
-AI-powered urban heat island analysis and cooling-intervention simulator — covering **20 Indian cities**.
+<h1 align="center">Urban Heat Mitigation</h1>
 
-*Status: V1.6 — actively being improved.*
+<p align="center">
+  <strong>AI-powered urban heat analysis and cooling-intervention simulation for 20 Indian cities.</strong><br>
+  Explore heat exposure, understand its drivers, and evaluate practical mitigation strategies.
+</p>
 
-## Live Demo
+<p align="center">
+  <a href="https://urban-heat-mitigation-mu.vercel.app/">Live Demo</a> ·
+  <a href="https://urban-heat-api.onrender.com/docs">API Documentation</a>
+</p>
 
-- 🌐 Frontend: https://urban-heat-mitigation-mu.vercel.app/
-- ⚙️ API: https://urban-heat-api.onrender.com/docs
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-## Features
+## Overview
 
-- **Heat Map** — interactive grid map (Deck.gl + MapLibre) showing land surface temperature and hotspot tiers
-- **Driver Analysis** — SHAP-based explainability showing what's driving the heat in each grid cell
-- **Scenario Builder** — simulate cooling interventions (tree cover, reflective roofs, etc.) with a live before/after split view
-- **Light / Dark mode** — Apple-inspired light theme, toggle in the sidebar (persists across visits)
-- **LST vs Air Temperature explainer** — in-app modal clarifying what the displayed values actually measure
+Urban Heat Mitigation combines geospatial data, machine learning, explainability, and interactive visualization to analyze urban heat patterns across **20 Indian cities**.
+
+The system uses a shared **XGBoost model** to analyze grid-level heat drivers, **SHAP** to explain model predictions, and a scenario engine to simulate cooling interventions such as increased tree cover and reflective roofs.
+
+**Current status:** V1.6 — actively being improved.
+
+## Architecture
+
+<p align="center">
+  <img src="docs/architecture.svg" alt="Urban Heat Mitigation architecture" width="100%">
+</p>
+
+### End-to-end flow
+
+```text
+City / spatial data
+        ↓
+Feature engineering + GeoParquet
+        ↓
+Shared XGBoost model
+        ↓
+Heat prediction + SHAP explanations
+        ↓
+FastAPI
+        ↓
+React + Deck.gl + MapLibre
+        ↓
+Heat maps → driver analysis → mitigation scenarios
+```
+
+## Core Capabilities
+
+### Heat Mapping
+Interactive spatial grids visualize land-surface temperature and hotspot tiers for each supported city.
+
+### Driver Analysis
+SHAP-based explanations show which features contribute to heat predictions at the grid-cell level.
+
+### Cooling Scenario Builder
+Simulate interventions such as increased tree cover and reflective roofs and compare before/after outcomes.
+
+### Spatial Visualization
+Deck.gl and MapLibre provide interactive map rendering, while Recharts supports analytical comparisons.
+
+### Temperature Context
+The application includes an explainer distinguishing **land surface temperature (LST)** from air temperature so the displayed measurements are interpreted correctly.
+
+## Model & Evaluation
+
+A single shared **XGBoost model** is trained across the supported cities instead of maintaining one independent model per city.
+
+Evaluation uses a **leave-cities-out split**, which tests whether the model can generalize to a city it did not see during training rather than measuring performance on a random sample from already-seen cities.
+
+SHAP provides local feature attribution for interpreting the model's heat predictions.
 
 ## Tech Stack
 
-| | |
-|---|---|
-| **Backend** | FastAPI · XGBoost · SHAP · GeoPandas |
-| **Frontend** | React · Vite · Deck.gl · MapLibre GL · Recharts |
-| **Storage** | GeoParquet flat files — zero infrastructure |
+| Layer | Technology |
+| --- | --- |
+| ML | XGBoost, SHAP |
+| Geospatial | GeoPandas, GeoParquet |
+| Backend | FastAPI, Python |
+| Frontend | React, Vite |
+| Maps | Deck.gl, MapLibre GL |
+| Charts | Recharts |
+| Storage | GeoParquet flat files |
+| Deployment | Vercel + Render |
+
+## Screenshots
+
+<div align="center">
+
+### Heat Map
+
+<img src="docs/screenshots/heat-map.png" alt="Urban heat map" width="850">
+
+### Driver Analysis
+
+<img src="docs/screenshots/driver-analysis.png" alt="Heat driver analysis" width="850">
+
+### Scenario Builder
+
+<img src="docs/screenshots/scenario-builder.png" alt="Cooling intervention scenario builder" width="850">
+
+</div>
 
 ## Run Locally
 
-Data and a trained model are already included in this repo — no generation or training needed to run it.
+The repository includes the processed data and trained model artifacts required to run the application locally.
 
-**Backend**
+### Backend
+
 ```bash
 python -m venv venv
-venv\Scripts\Activate.ps1     # Windows. Mac/Linux: source venv/bin/activate
+```
+
+Windows PowerShell:
+
+```powershell
+venv\Scripts\Activate.ps1
+```
+
+macOS / Linux:
+
+```bash
+source venv/bin/activate
+```
+
+Install dependencies and start the API:
+
+```bash
 pip install -r requirements.txt
 uvicorn api.main:app --reload --port 8000
 ```
 
-**Frontend** (in a second terminal)
+### Frontend
+
+In a second terminal:
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Open `http://localhost:5173` and pick a city from the sidebar.
+Open `http://localhost:5173` and select a city from the application.
 
 ## Project Structure
 
-```
-api/        FastAPI routes — grid, hotspots, drivers, scenarios
-pipeline/   Synthetic data generation & feature engineering
-models/     XGBoost training, SHAP explainability, trained artifacts
-data/       Per-city processed grids & scenario presets
-frontend/   React + Vite app
+```text
+api/        FastAPI routes for grids, hotspots, drivers and scenarios
+pipeline/   Data preparation and feature engineering
+models/     XGBoost training, SHAP analysis and model artifacts
+data/       Per-city processed grids and scenario presets
+frontend/   React + Vite application
 ```
 
-## How It Works
+## API
 
-One shared XGBoost model is trained across all 20 cities (rather than 20 separate models), so cross-validation uses a leave-cities-out split — a fair test of generalizing to a new city, not a preview of in-production accuracy. Every API endpoint takes a `?city=<id>` query param; add a new city by extending `CITIES` in `pipeline/config.py`.
+The backend exposes city-scoped endpoints for the main analysis workflow, including:
+
+- Heat-map grid data
+- Hotspot information
+- Driver / SHAP analysis
+- Cooling scenarios
+
+Each endpoint accepts a city identifier so the same analysis pipeline can serve all supported cities.
+
+Interactive API documentation is available at the deployed FastAPI `/docs` endpoint.
+
+## Deployment
+
+- **Frontend:** Vercel
+- **Backend:** Render
+- **Data / model artifacts:** repository-hosted flat files and trained artifacts
+
+## License
+
+MIT
+
+---
+
+<p align="center">
+  <a href="https://urban-heat-mitigation-mu.vercel.app/">Live Demo</a> ·
+  <a href="https://urban-heat-api.onrender.com/docs">API Docs</a>
+</p>
