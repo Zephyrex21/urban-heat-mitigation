@@ -23,7 +23,7 @@
 
 Urban Heat Mitigation combines geospatial data, machine learning, explainability, and interactive visualization to analyze urban heat patterns across **20 Indian cities**.
 
-The system uses a shared **XGBoost model** to analyze grid-level heat drivers, **SHAP** to explain model predictions, and a scenario engine to simulate cooling interventions such as increased tree cover and reflective roofs.
+A shared **XGBoost model** analyzes grid-level heat drivers, **SHAP** explains model predictions, and a scenario engine simulates cooling interventions such as increased tree cover and reflective roofs.
 
 **Current status:** V1.6 — actively being improved.
 
@@ -66,15 +66,15 @@ Simulate interventions such as increased tree cover and reflective roofs and com
 Deck.gl and MapLibre provide interactive map rendering, while Recharts supports analytical comparisons.
 
 ### Temperature Context
-The application includes an explainer distinguishing **land surface temperature (LST)** from air temperature so the displayed measurements are interpreted correctly.
+The application distinguishes **land surface temperature (LST)** from air temperature so displayed measurements are interpreted correctly.
 
 ## Model & Evaluation
 
 A single shared **XGBoost model** is trained across the supported cities instead of maintaining one independent model per city.
 
-Evaluation uses a **leave-cities-out split**, which tests whether the model can generalize to a city it did not see during training rather than measuring performance on a random sample from already-seen cities.
+Evaluation uses a **leave-cities-out split**, testing whether the model can generalize to a city it did not see during training rather than measuring performance on a random sample from already-seen cities.
 
-SHAP provides local feature attribution for interpreting the model's heat predictions.
+SHAP provides local feature attribution for interpreting heat predictions.
 
 ## Tech Stack
 
@@ -91,25 +91,11 @@ SHAP provides local feature attribution for interpreting the model's heat predic
 
 ## Screenshots
 
-<div align="center">
-
-### Heat Map
-
-<img src="docs/screenshots/heat-map.png" alt="Urban heat map" width="850">
-
-### Driver Analysis
-
-<img src="docs/screenshots/driver-analysis.png" alt="Heat driver analysis" width="850">
-
-### Scenario Builder
-
-<img src="docs/screenshots/scenario-builder.png" alt="Cooling intervention scenario builder" width="850">
-
-</div>
+The repository currently does not contain screenshot image assets. Add project screenshots under `docs/screenshots/` and link them here when ready; the README intentionally avoids broken image references.
 
 ## Run Locally
 
-The repository includes the processed data and trained model artifacts required to run the application locally.
+The repository includes processed data and trained model artifacts required to run the application locally.
 
 ### Backend
 
